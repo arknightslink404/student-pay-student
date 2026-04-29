@@ -3,206 +3,118 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Exchange - Advanced Marketplace</title>
+<title>Exchange Pro</title>
 
 <style>
 body {margin:0;font-family:Arial;background:#f5f6fa;}
-header {background:#ff6f00;color:white;padding:15px;text-align:center;font-size:24px;font-weight:bold;}
-nav {display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:white;border-bottom:1px solid #ddd;}
-nav input {padding:6px;width:250px;border:1px solid #ccc;border-radius:5px;}
+header {background:#ff6f00;color:white;padding:18px;text-align:center;font-size:26px;font-weight:bold;}
+nav {display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:white;border-bottom:1px solid #ddd;}
+nav input {padding:8px;width:260px;border:1px solid #ccc;border-radius:6px;}
 
 .layout {display:flex;}
-.sidebar {
-  width:220px;
-  background:white;
-  padding:15px;
-  border-right:1px solid #ddd;
-}
+.sidebar {width:240px;background:white;padding:20px;border-right:1px solid #ddd;}
 .sidebar h3 {margin-top:0;}
 
-/* ⭐ 分类样式升级 */
-.cat-item {
-  display:flex;
-  align-items:center;
-  gap:8px;
-  margin:10px 0;
-  cursor:pointer;
-  color:#333;
-  transition:0.2s;
-}
-.cat-item:hover {
-  color:#ff6f00;
-  transform:translateX(4px);
-}
+.cat-item {display:flex;align-items:center;gap:10px;margin:10px 0;padding:8px;border-radius:8px;cursor:pointer;transition:0.2s;}
+.cat-item:hover {background:#fff3e0;color:#ff6f00;transform:translateX(5px);} 
+.active {background:#ffe0b2;color:#ff6f00;font-weight:bold;}
 
 .container {flex:1;padding:20px;}
 .grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
 
-.card {
-  background:white;
-  border-radius:10px;
-  overflow:hidden;
-  box-shadow:0 2px 6px rgba(0,0,0,0.1);
-}
-.card img {width:100%;height:140px;object-fit:cover;}
-.card-content {padding:12px;}
-.card h3 {margin:5px 0;font-size:16px;}
+.card {background:white;border-radius:12px;overflow:hidden;box-shadow:0 3px 10px rgba(0,0,0,0.1);transition:0.3s;}
+.card:hover {transform:translateY(-5px) scale(1.02);} 
+.card img {width:100%;height:150px;object-fit:cover;}
+.card-content {padding:14px;}
+.card h3 {margin:5px 0;font-size:17px;}
 .price {color:#ff6f00;font-weight:bold;}
 
-button {
-  background:#ff6f00;
-  color:white;
-  border:none;
-  padding:8px;
-  border-radius:5px;
-  cursor:pointer;
-  width:100%;
-}
+button {background:#ff6f00;color:white;border:none;padding:8px;border-radius:6px;cursor:pointer;width:100%;}
+button:hover {background:#e65c00;}
 
 .rating {color:gold;font-size:14px;}
 .seller {font-size:12px;color:#777;}
 
 .section {margin-bottom:30px;}
-
-.upload-box {
-  background:white;
-  padding:15px;
-  border-radius:10px;
-}
-
 footer {background:#ff6f00;color:white;text-align:center;padding:15px;margin-top:40px;}
 </style>
 </head>
 
 <body>
-
-<header>📚 Exchange Marketplace</header>
+<header>🚀 Exchange Pro Marketplace</header>
 
 <nav>
-  <strong>Browse Resources</strong>
-  <input type="text" id="search" placeholder="Search..." onkeyup="searchNotes()">
+<strong>Explore Student Resources</strong>
+<input type="text" id="search" placeholder="Search notes..." onkeyup="searchNotes()">
 </nav>
 
 <div class="layout">
 
 <div class="sidebar">
-  <h3>Categories</h3>
-
-  <div class="cat-item" onclick="filter('all')">📂 <span>All</span></div>
-  <div class="cat-item" onclick="filter('math')">➗ <span>Math</span></div>
-  <div class="cat-item" onclick="filter('calculus')">📈 <span>Calculus</span></div>
-  <div class="cat-item" onclick="filter('english')">📖 <span>English / Literacy</span></div>
-  <div class="cat-item" onclick="filter('biology')">🧬 <span>Biology</span></div>
-  <div class="cat-item" onclick="filter('social')">📱 <span>Social Media</span></div>
-  <div class="cat-item" onclick="filter('entrepreneur')">💼 <span>Entrepreneur</span></div>
-  <div class="cat-item" onclick="filter('others')">🧩 <span>Others (BC Courses)</span></div>
-
-  <h3>Grade</h3>
-  <div class="cat-item" onclick="filterGrade('12')">🎓 <span>Grade 12</span></div>
-  <div class="cat-item" onclick="filterGrade('11')">📘 <span>Grade 11</span></div>
-  <div class="cat-item" onclick="filterGrade('10')">📗 <span>Grade 10</span></div>
+<h3>Categories</h3>
+<div class="cat-item active" onclick="filter('all',this)">📂 All</div>
+<div class="cat-item" onclick="filter('calculus',this)">📈 Calculus (4)</div>
+<div class="cat-item" onclick="filter('english',this)">📖 Literacy (3)</div>
+<div class="cat-item" onclick="filter('social',this)">📱 Social Media (3)</div>
+<div class="cat-item" onclick="filter('entrepreneur',this)">💼 Entrepreneur (3)</div>
+<div class="cat-item" onclick="filter('others',this)">🧩 Others (4)</div>
 </div>
 
 <div class="container">
-
 <div class="section">
-<h2>Featured</h2>
+<h2>🔥 Featured Notes</h2>
 <div class="grid" id="notes">
 
-<!-- 原内容保持不变 -->
+<!-- Calculus -->
+<div class="card" data-subject="calculus"><img src="https://picsum.photos/300/200?1"><div class="card-content"><h3>Derivatives Full Guide</h3><div class="seller">by Alex</div><div class="rating">★★★★★</div><p class="price">$3</p><button onclick="buy(3)">Buy</button></div></div>
+<div class="card" data-subject="calculus"><img src="https://picsum.photos/300/200?2"><div class="card-content"><h3>Integration Notes</h3><div class="seller">by Ryan</div><div class="rating">★★★★☆</div><p class="price">$2</p><button onclick="buy(2)">Buy</button></div></div>
+<div class="card" data-subject="calculus"><img src="https://picsum.photos/300/200?3"><div class="card-content"><h3>Limits Cheat Sheet</h3><div class="seller">by Mia</div><div class="rating">★★★★★</div><p class="price">$2</p><button onclick="buy(2)">Buy</button></div></div>
+<div class="card" data-subject="calculus"><img src="https://picsum.photos/300/200?4"><div class="card-content"><h3>Exam Review Pack</h3><div class="seller">by Sam</div><div class="rating">★★★★★</div><p class="price">$4</p><button onclick="buy(4)">Buy</button></div></div>
+
+<!-- Literacy -->
+<div class="card" data-subject="english"><img src="https://picsum.photos/300/200?5"><div class="card-content"><h3>Essay Writing Guide</h3><div class="seller">by Leo</div><div class="rating">★★★★★</div><p class="price">Free</p><button onclick="buy(0)">Download</button></div></div>
+<div class="card" data-subject="english"><img src="https://picsum.photos/300/200?6"><div class="card-content"><h3>Poetry Analysis</h3><div class="seller">by Emma</div><div class="rating">★★★★☆</div><p class="price">$2</p><button onclick="buy(2)">Buy</button></div></div>
+<div class="card" data-subject="english"><img src="https://picsum.photos/300/200?7"><div class="card-content"><h3>Novel Study Notes</h3><div class="seller">by Jack</div><div class="rating">★★★★★</div><p class="price">$3</p><button onclick="buy(3)">Buy</button></div></div>
+
+<!-- Social -->
+<div class="card" data-subject="social"><img src="https://picsum.photos/300/200?8"><div class="card-content"><h3>Marketing Basics</h3><div class="seller">by Chris</div><div class="rating">★★★★★</div><p class="price">$2</p><button onclick="buy(2)">Buy</button></div></div>
+<div class="card" data-subject="social"><img src="https://picsum.photos/300/200?9"><div class="card-content"><h3>Content Strategy</h3><div class="seller">by Sarah</div><div class="rating">★★★★☆</div><p class="price">$3</p><button onclick="buy(3)">Buy</button></div></div>
+<div class="card" data-subject="social"><img src="https://picsum.photos/300/200?10"><div class="card-content"><h3>Influencer Guide</h3><div class="seller">by Lily</div><div class="rating">★★★★★</div><p class="price">$3</p><button onclick="buy(3)">Buy</button></div></div>
+
+<!-- Entrepreneur -->
+<div class="card" data-subject="entrepreneur"><img src="https://picsum.photos/300/200?11"><div class="card-content"><h3>Startup Guide</h3><div class="seller">by Kevin</div><div class="rating">★★★★★</div><p class="price">$3</p><button onclick="buy(3)">Buy</button></div></div>
+<div class="card" data-subject="entrepreneur"><img src="https://picsum.photos/300/200?12"><div class="card-content"><h3>Business Plan</h3><div class="seller">by Amy</div><div class="rating">★★★★☆</div><p class="price">$2</p><button onclick="buy(2)">Buy</button></div></div>
+<div class="card" data-subject="entrepreneur"><img src="https://picsum.photos/300/200?13"><div class="card-content"><h3>Pitch Deck Notes</h3><div class="seller">by Daniel</div><div class="rating">★★★★★</div><p class="price">$4</p><button onclick="buy(4)">Buy</button></div></div>
+
+<!-- Others -->
+<div class="card" data-subject="others"><img src="https://picsum.photos/300/200?14"><div class="card-content"><h3>Psychology Basics</h3><div class="seller">by David</div><div class="rating">★★★★☆</div><p class="price">$2</p><button onclick="buy(2)">Buy</button></div></div>
+<div class="card" data-subject="others"><img src="https://picsum.photos/300/200?15"><div class="card-content"><h3>Art Design</h3><div class="seller">by Lily</div><div class="rating">★★★★★</div><p class="price">Free</p><button onclick="buy(0)">Download</button></div></div>
+<div class="card" data-subject="others"><img src="https://picsum.photos/300/200?16"><div class="card-content"><h3>Computer Science Intro</h3><div class="seller">by Jason</div><div class="rating">★★★★☆</div><p class="price">$3</p><button onclick="buy(3)">Buy</button></div></div>
+<div class="card" data-subject="others"><img src="https://picsum.photos/300/200?17"><div class="card-content"><h3>Law Studies Notes</h3><div class="seller">by Anna</div><div class="rating">★★★★★</div><p class="price">$3</p><button onclick="buy(3)">Buy</button></div></div>
 
 </div>
 </div>
-
-<div class="section">
-<h2>Upload Resource</h2>
-<div class="upload-box">
-<input id="title" placeholder="Title"><br><br>
-<input id="subject" placeholder="Subject"><br><br>
-<input id="grade" placeholder="Grade"><br><br>
-<input id="price" placeholder="Price"><br><br>
-<button onclick="upload()">Upload</button>
 </div>
 </div>
 
-</div>
-
-</div>
-
-<footer>
-<p>Capstone Advanced Version</p>
-</footer>
+<footer>Capstone Premium Version 🚀</footer>
 
 <script>
-let credits = 10;
+function buy(cost){alert(cost===0?"Downloaded!":"Purchased for $"+cost);}
 
-function buy(cost){
-  if(cost === 0){alert("Downloaded!");return;}
-  if(credits >= cost){
-    credits -= cost;
-    alert("Purchased! Credits left: " + credits);
-  } else {
-    alert("Not enough credits");
-  }
-}
+function filter(subject,el){
+let cards=document.querySelectorAll('.card');
+cards.forEach(c=>{c.style.display=(subject==='all'||c.dataset.subject===subject)?'block':'none'});
 
-function upload(){
-  let title = document.getElementById("title").value;
-  let subject = document.getElementById("subject").value.toLowerCase();
-  let grade = document.getElementById("grade").value;
-  let price = document.getElementById("price").value || 0;
-
-  let newCard = document.createElement("div");
-  newCard.className = "card";
-  newCard.setAttribute("data-subject", subject);
-  newCard.setAttribute("data-grade", grade);
-
-  newCard.innerHTML = `
-  <img src="https://picsum.photos/300/200?random=${Math.random()}">
-  <div class="card-content">
-    <h3>${title}</h3>
-    <div class="seller">by You</div>
-    <div class="rating">★★★★★</div>
-    <p class="price">$${price}</p>
-    <button onclick="buy(${price})">Buy</button>
-  </div>`;
-
-  document.getElementById("notes").appendChild(newCard);
-  alert("Upload success!");
+document.querySelectorAll('.cat-item').forEach(i=>i.classList.remove('active'));
+el.classList.add('active');
 }
 
 function searchNotes(){
-  let input = document.getElementById("search").value.toLowerCase();
-  let cards = document.querySelectorAll(".card");
-
-  cards.forEach(card => {
-    let title = card.innerText.toLowerCase();
-    card.style.display = title.includes(input) ? "block" : "none";
-  });
-}
-
-function filter(subject){
-  let cards = document.querySelectorAll(".card");
-  cards.forEach(card => {
-    if(subject === 'all' || card.getAttribute("data-subject") === subject){
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
-    }
-  });
-}
-
-function filterGrade(grade){
-  let cards = document.querySelectorAll(".card");
-  cards.forEach(card => {
-    if(card.getAttribute("data-grade") === grade){
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
-    }
-  });
+let input=document.getElementById('search').value.toLowerCase();
+let cards=document.querySelectorAll('.card');
+cards.forEach(c=>{c.style.display=c.innerText.toLowerCase().includes(input)?'block':'none'});
 }
 </script>
-
 </body>
 </html>
