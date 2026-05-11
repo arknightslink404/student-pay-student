@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Exchange Pro</title>
 
 <style>
@@ -18,7 +20,7 @@ background:#ff6f00;
 color:white;
 padding:18px;
 text-align:center;
-font-size:26px;
+font-size:28px;
 font-weight:bold;
 }
 
@@ -32,7 +34,7 @@ border-bottom:1px solid #ddd;
 }
 
 nav input{
-padding:8px;
+padding:10px;
 width:260px;
 border:1px solid #ccc;
 border-radius:6px;
@@ -58,7 +60,7 @@ display:flex;
 align-items:center;
 gap:10px;
 margin:10px 0;
-padding:8px;
+padding:10px;
 border-radius:8px;
 cursor:pointer;
 transition:0.2s;
@@ -101,7 +103,7 @@ transform:translateY(-5px) scale(1.02);
 
 .card img{
 width:100%;
-height:150px;
+height:160px;
 object-fit:cover;
 }
 
@@ -111,7 +113,7 @@ padding:14px;
 
 .card h3{
 margin:5px 0;
-font-size:17px;
+font-size:18px;
 }
 
 .price{
@@ -142,10 +144,6 @@ font-size:14px;
 .seller{
 font-size:12px;
 color:#777;
-}
-
-.section{
-margin-bottom:30px;
 }
 
 .upload-box{
@@ -180,7 +178,6 @@ padding:10px;
 margin:10px 0;
 border-radius:6px;
 border:1px solid #ccc;
-box-sizing:border-box;
 }
 
 #comments li{
@@ -209,12 +206,15 @@ margin-top:40px;
 </header>
 
 <nav>
-<strong>Explore Student Resources</strong>
+
+<strong>
+Explore Student Resources
+</strong>
 
 <input 
-type="text" 
-id="search" 
-placeholder="Search notes..." 
+type="text"
+id="search"
+placeholder="Search notes..."
 onkeyup="searchNotes()"
 >
 
@@ -298,40 +298,9 @@ Upload Note
 
 <!-- NOTES -->
 
-<div class="section">
-
 <h2>🔥 Featured Notes</h2>
 
-<div class="grid" id="notes">
-
-<div class="card" data-subject="calculus">
-<img src="https://picsum.photos/300/200?1">
-
-<div class="card-content">
-
-<h3>Derivatives Full Guide</h3>
-
-<div class="seller">
-by Alex
-</div>
-
-<div class="rating">
-★★★★★
-</div>
-
-<p class="price">
-$3
-</p>
-
-<button onclick="buy(3)">
-Buy
-</button>
-
-</div>
-</div>
-
-</div>
-</div>
+<div class="grid" id="notes"></div>
 
 <!-- COMMENTS -->
 
@@ -340,7 +309,7 @@ Buy
 <h2>💬 Comments</h2>
 
 <input 
-id="commentInput" 
+id="commentInput"
 placeholder="Write a comment..."
 >
 
@@ -359,12 +328,53 @@ Post Comment
 Capstone Premium Version 🚀
 </footer>
 
-<script>
+<script type="module">
 
-function buy(cost){
+/* FIREBASE */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+onSnapshot,
+query,
+orderBy
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBpytw_N21mdZ9V-inxPqqDIHV2WA20Ii0",
+
+authDomain: "student-exchange-site.firebaseapp.com",
+
+projectId: "student-exchange-site",
+
+storageBucket: "student-exchange-site.firebasestorage.app",
+
+messagingSenderId: "162663929723",
+
+appId: "1:162663929723:web:2ef6d7d993c119865a8fde",
+
+measurementId: "G-56GFC9QDS3"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+/* BUY */
+
+window.buy=function(cost){
 
 alert(
-cost===0
+cost==0
 ?
 "Downloaded!"
 :
@@ -373,7 +383,10 @@ cost===0
 
 }
 
-function filter(subject,el){
+
+/* FILTER */
+
+window.filter=function(subject,el){
 
 let cards=document.querySelectorAll('.card');
 
@@ -396,7 +409,10 @@ el.classList.add('active');
 
 }
 
-function searchNotes(){
+
+/* SEARCH */
+
+window.searchNotes=function(){
 
 let input=document
 .getElementById('search')
@@ -418,7 +434,10 @@ c.innerText.toLowerCase().includes(input)
 
 }
 
-async function uploadNote(){
+
+/* UPLOAD NOTE */
+
+window.uploadNote=async function(){
 
 let title=document.getElementById("title").value;
 
@@ -436,6 +455,8 @@ return;
 
 }
 
+/* CLOUDINARY */
+
 let formData=new FormData();
 
 formData.append("file",file);
@@ -445,54 +466,32 @@ formData.append("upload_preset","idoqptnf");
 try{
 
 let response=await fetch(
+
 "https://api.cloudinary.com/v1_1/di4ty6jl4/image/upload",
+
 {
 method:"POST",
 body:formData
 }
+
 );
 
 let data=await response.json();
 
 let imageUrl=data.secure_url;
 
-let notes=document.getElementById("notes");
 
-let card=document.createElement("div");
+/* SAVE TO FIRESTORE */
 
-card.className="card";
+await addDoc(collection(db,"notes"),{
 
-card.setAttribute("data-subject",subject);
+title:title,
+subject:subject,
+price:price,
+image:imageUrl,
+time:Date.now()
 
-card.innerHTML=`
-
-<img src="${imageUrl}">
-
-<div class="card-content">
-
-<h3>${title}</h3>
-
-<div class="seller">
-by Student
-</div>
-
-<div class="rating">
-★★★★★
-</div>
-
-<p class="price">
-$${price}
-</p>
-
-<button onclick="buy(${price})">
-Buy
-</button>
-
-</div>
-
-`;
-
-notes.prepend(card);
+});
 
 alert("Upload Success!");
 
@@ -507,23 +506,109 @@ console.log(error);
 
 }
 
-function addComment(){
+
+/* REALTIME NOTES */
+
+const notesQuery=query(
+collection(db,"notes"),
+orderBy("time","desc")
+);
+
+onSnapshot(notesQuery,(snapshot)=>{
+
+let notes=document.getElementById("notes");
+
+notes.innerHTML="";
+
+snapshot.forEach((doc)=>{
+
+let d=doc.data();
+
+let card=document.createElement("div");
+
+card.className="card";
+
+card.setAttribute("data-subject",d.subject);
+
+card.innerHTML=`
+
+<img src="${d.image}">
+
+<div class="card-content">
+
+<h3>${d.title}</h3>
+
+<div class="seller">
+by Student
+</div>
+
+<div class="rating">
+★★★★★
+</div>
+
+<p class="price">
+$${d.price}
+</p>
+
+<button onclick="buy(${d.price})">
+Buy
+</button>
+
+</div>
+
+`;
+
+notes.appendChild(card);
+
+});
+
+});
+
+
+/* COMMENTS */
+
+window.addComment=async function(){
 
 let input=document.getElementById("commentInput");
 
-let comments=document.getElementById("comments");
-
 if(input.value==="") return;
 
-let li=document.createElement("li");
+await addDoc(collection(db,"comments"),{
 
-li.innerText=input.value;
+text:input.value,
+time:Date.now()
 
-comments.prepend(li);
+});
 
 input.value="";
 
 }
+
+
+/* REALTIME COMMENTS */
+
+const commentsQuery=query(
+collection(db,"comments"),
+orderBy("time","desc")
+);
+
+onSnapshot(commentsQuery,(snapshot)=>{
+
+let comments=document.getElementById("comments");
+
+comments.innerHTML="";
+
+snapshot.forEach((doc)=>{
+
+let li=document.createElement("li");
+
+li.innerText=doc.data().text;
+
+comments.appendChild(li);
+
+});
+
+});
 
 </script>
 
