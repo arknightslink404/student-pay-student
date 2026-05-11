@@ -6,36 +6,147 @@
 <title>Exchange Pro</title>
 
 <style>
-body {margin:0;font-family:Arial;background:#f5f6fa;}
-header {background:#ff6f00;color:white;padding:18px;text-align:center;font-size:26px;font-weight:bold;}
-nav {display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:white;border-bottom:1px solid #ddd;}
-nav input {padding:8px;width:260px;border:1px solid #ccc;border-radius:6px;}
 
-.layout {display:flex;}
-.sidebar {width:240px;background:white;padding:20px;border-right:1px solid #ddd;}
-.sidebar h3 {margin-top:0;}
+body{
+margin:0;
+font-family:Arial;
+background:#f5f6fa;
+}
 
-.cat-item {display:flex;align-items:center;gap:10px;margin:10px 0;padding:8px;border-radius:8px;cursor:pointer;transition:0.2s;}
-.cat-item:hover {background:#fff3e0;color:#ff6f00;transform:translateX(5px);} 
-.active {background:#ffe0b2;color:#ff6f00;font-weight:bold;}
+header{
+background:#ff6f00;
+color:white;
+padding:18px;
+text-align:center;
+font-size:26px;
+font-weight:bold;
+}
 
-.container {flex:1;padding:20px;}
-.grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 20px;
+background:white;
+border-bottom:1px solid #ddd;
+}
 
-.card {background:white;border-radius:12px;overflow:hidden;box-shadow:0 3px 10px rgba(0,0,0,0.1);transition:0.3s;}
-.card:hover {transform:translateY(-5px) scale(1.02);} 
-.card img {width:100%;height:150px;object-fit:cover;}
-.card-content {padding:14px;}
-.card h3 {margin:5px 0;font-size:17px;}
-.price {color:#ff6f00;font-weight:bold;}
+nav input{
+padding:8px;
+width:260px;
+border:1px solid #ccc;
+border-radius:6px;
+}
 
-button {background:#ff6f00;color:white;border:none;padding:8px;border-radius:6px;cursor:pointer;width:100%;}
-button:hover {background:#e65c00;}
+.layout{
+display:flex;
+}
 
-.rating {color:gold;font-size:14px;}
-.seller {font-size:12px;color:#777;}
+.sidebar{
+width:240px;
+background:white;
+padding:20px;
+border-right:1px solid #ddd;
+}
 
-.section {margin-bottom:30px;}
+.sidebar h3{
+margin-top:0;
+}
+
+.cat-item{
+display:flex;
+align-items:center;
+gap:10px;
+margin:10px 0;
+padding:8px;
+border-radius:8px;
+cursor:pointer;
+transition:0.2s;
+}
+
+.cat-item:hover{
+background:#fff3e0;
+color:#ff6f00;
+transform:translateX(5px);
+}
+
+.active{
+background:#ffe0b2;
+color:#ff6f00;
+font-weight:bold;
+}
+
+.container{
+flex:1;
+padding:20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px) scale(1.02);
+}
+
+.card img{
+width:100%;
+height:150px;
+object-fit:cover;
+}
+
+.card-content{
+padding:14px;
+}
+
+.card h3{
+margin:5px 0;
+font-size:17px;
+}
+
+.price{
+color:#ff6f00;
+font-weight:bold;
+}
+
+button{
+background:#ff6f00;
+color:white;
+border:none;
+padding:10px;
+border-radius:6px;
+cursor:pointer;
+width:100%;
+font-weight:bold;
+}
+
+button:hover{
+background:#e65c00;
+}
+
+.rating{
+color:gold;
+font-size:14px;
+}
+
+.seller{
+font-size:12px;
+color:#777;
+}
+
+.section{
+margin-bottom:30px;
+}
 
 .upload-box{
 background:white;
@@ -72,36 +183,78 @@ border:1px solid #ccc;
 box-sizing:border-box;
 }
 
-footer {background:#ff6f00;color:white;text-align:center;padding:15px;margin-top:40px;}
+#comments li{
+background:#f1f1f1;
+padding:10px;
+margin:8px 0;
+border-radius:6px;
+list-style:none;
+}
+
+footer{
+background:#ff6f00;
+color:white;
+text-align:center;
+padding:15px;
+margin-top:40px;
+}
+
 </style>
 </head>
 
 <body>
 
-<header>🚀 Exchange Pro Marketplace</header>
+<header>
+🚀 Exchange Pro Marketplace
+</header>
 
 <nav>
 <strong>Explore Student Resources</strong>
-<input type="text" id="search" placeholder="Search notes..." onkeyup="searchNotes()">
+
+<input 
+type="text" 
+id="search" 
+placeholder="Search notes..." 
+onkeyup="searchNotes()"
+>
+
 </nav>
 
 <div class="layout">
 
 <div class="sidebar">
+
 <h3>Categories</h3>
 
-<div class="cat-item active" onclick="filter('all',this)">📂 All</div>
-<div class="cat-item" onclick="filter('calculus',this)">📈 Calculus</div>
-<div class="cat-item" onclick="filter('english',this)">📖 Literacy</div>
-<div class="cat-item" onclick="filter('social',this)">📱 Social Media</div>
-<div class="cat-item" onclick="filter('entrepreneur',this)">💼 Entrepreneur</div>
-<div class="cat-item" onclick="filter('others',this)">🧩 Others</div>
+<div class="cat-item active" onclick="filter('all',this)">
+📂 All
+</div>
+
+<div class="cat-item" onclick="filter('calculus',this)">
+📈 Calculus
+</div>
+
+<div class="cat-item" onclick="filter('english',this)">
+📖 Literacy
+</div>
+
+<div class="cat-item" onclick="filter('social',this)">
+📱 Social Media
+</div>
+
+<div class="cat-item" onclick="filter('entrepreneur',this)">
+💼 Entrepreneur
+</div>
+
+<div class="cat-item" onclick="filter('others',this)">
+🧩 Others
+</div>
 
 </div>
 
 <div class="container">
 
-<!-- UPLOAD SECTION -->
+<!-- UPLOAD -->
 
 <div class="upload-box">
 
@@ -110,11 +263,27 @@ footer {background:#ff6f00;color:white;text-align:center;padding:15px;margin-top
 <input id="title" placeholder="Title">
 
 <select id="subject">
-<option value="calculus">Calculus</option>
-<option value="english">Literacy</option>
-<option value="social">Social Media</option>
-<option value="entrepreneur">Entrepreneur</option>
-<option value="others">Others</option>
+
+<option value="calculus">
+Calculus
+</option>
+
+<option value="english">
+Literacy
+</option>
+
+<option value="social">
+Social Media
+</option>
+
+<option value="entrepreneur">
+Entrepreneur
+</option>
+
+<option value="others">
+Others
+</option>
+
 </select>
 
 <input id="price" placeholder="Price">
@@ -127,43 +296,37 @@ Upload Note
 
 </div>
 
+<!-- NOTES -->
+
 <div class="section">
+
 <h2>🔥 Featured Notes</h2>
 
 <div class="grid" id="notes">
 
-<!-- SAMPLE NOTES -->
-
 <div class="card" data-subject="calculus">
 <img src="https://picsum.photos/300/200?1">
+
 <div class="card-content">
+
 <h3>Derivatives Full Guide</h3>
-<div class="seller">by Alex</div>
-<div class="rating">★★★★★</div>
-<p class="price">$3</p>
-<button onclick="buy(3)">Buy</button>
-</div>
+
+<div class="seller">
+by Alex
 </div>
 
-<div class="card" data-subject="english">
-<img src="https://picsum.photos/300/200?2">
-<div class="card-content">
-<h3>Essay Writing Guide</h3>
-<div class="seller">by Emma</div>
-<div class="rating">★★★★★</div>
-<p class="price">$2</p>
-<button onclick="buy(2)">Buy</button>
-</div>
+<div class="rating">
+★★★★★
 </div>
 
-<div class="card" data-subject="social">
-<img src="https://picsum.photos/300/200?3">
-<div class="card-content">
-<h3>Marketing Basics</h3>
-<div class="seller">by Chris</div>
-<div class="rating">★★★★☆</div>
-<p class="price">$3</p>
-<button onclick="buy(3)">Buy</button>
+<p class="price">
+$3
+</p>
+
+<button onclick="buy(3)">
+Buy
+</button>
+
 </div>
 </div>
 
@@ -176,7 +339,10 @@ Upload Note
 
 <h2>💬 Comments</h2>
 
-<input id="commentInput" placeholder="Write a comment...">
+<input 
+id="commentInput" 
+placeholder="Write a comment..."
+>
 
 <button onclick="addComment()">
 Post Comment
@@ -193,199 +359,17 @@ Post Comment
 Capstone Premium Version 🚀
 </footer>
 
-<!-- FIREBASE -->
-
-<script type="module">
-
-import { initializeApp } 
-from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-
-import {
-getFirestore,
-collection,
-addDoc,
-onSnapshot
-}
-from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-import {
-getStorage,
-ref,
-uploadBytes,
-getDownloadURL
-}
-from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
-
-
-// 🔥 REPLACE THIS WITH YOUR FIREBASE CONFIG
-
-const firebaseConfig = {
-
-apiKey: "YOUR_API_KEY",
-
-authDomain: "YOUR_AUTH_DOMAIN",
-
-projectId: "YOUR_PROJECT_ID",
-
-storageBucket: "YOUR_STORAGE_BUCKET",
-
-messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-
-appId: "YOUR_APP_ID"
-
-};
-
-
-// INIT FIREBASE
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
-
-const storage = getStorage(app);
-
-
-// UPLOAD FUNCTION
-
-window.uploadNote = async function(){
-
-let title = document.getElementById("title").value;
-
-let subject = document.getElementById("subject").value;
-
-let price = document.getElementById("price").value || 0;
-
-let file = document.getElementById("imageFile").files[0];
-
-if(!title || !file){
-
-alert("Please fill all fields");
-
-return;
-
-}
-
-try{
-
-const storageRef = ref(storage, "images/" + file.name);
-
-await uploadBytes(storageRef, file);
-
-const imageUrl = await getDownloadURL(storageRef);
-
-await addDoc(collection(db, "notes"), {
-
-title,
-subject,
-price,
-image:imageUrl,
-time:Date.now()
-
-});
-
-alert("Upload Success!");
-
-}catch(error){
-
-alert(error.message);
-
-}
-
-};
-
-
-// REALTIME NOTES
-
-onSnapshot(collection(db, "notes"), (snapshot)=>{
-
-const container = document.getElementById("notes");
-
-snapshot.forEach((doc)=>{
-
-let d = doc.data();
-
-let card = document.createElement("div");
-
-card.className = "card";
-
-card.setAttribute("data-subject", d.subject);
-
-card.innerHTML = `
-
-<img src="${d.image}">
-
-<div class="card-content">
-
-<h3>${d.title}</h3>
-
-<div class="seller">by User</div>
-
-<div class="rating">★★★★★</div>
-
-<p class="price">$${d.price}</p>
-
-<button onclick="buy(${d.price})">
-Buy
-</button>
-
-</div>
-
-`;
-
-container.prepend(card);
-
-});
-
-});
-
-
-// COMMENTS
-
-window.addComment = async function(){
-
-let text = document.getElementById("commentInput").value;
-
-if(!text) return;
-
-await addDoc(collection(db, "comments"), {
-
-text:text,
-time:Date.now()
-
-});
-
-document.getElementById("commentInput").value = "";
-
-};
-
-
-// REALTIME COMMENTS
-
-onSnapshot(collection(db, "comments"), (snapshot)=>{
-
-let list = document.getElementById("comments");
-
-list.innerHTML = "";
-
-snapshot.forEach((doc)=>{
-
-let li = document.createElement("li");
-
-li.textContent = doc.data().text;
-
-list.appendChild(li);
-
-});
-
-});
-
-</script>
-
 <script>
 
 function buy(cost){
 
-alert(cost===0?"Downloaded!":"Purchased for $"+cost);
+alert(
+cost===0
+?
+"Downloaded!"
+:
+"Purchased for $" + cost
+);
 
 }
 
@@ -397,12 +381,15 @@ cards.forEach(c=>{
 
 c.style.display=
 (subject==='all'||c.dataset.subject===subject)
-?'block'
-:'none';
+?
+'block'
+:
+'none';
 
 });
 
-document.querySelectorAll('.cat-item')
+document
+.querySelectorAll('.cat-item')
 .forEach(i=>i.classList.remove('active'));
 
 el.classList.add('active');
@@ -411,8 +398,10 @@ el.classList.add('active');
 
 function searchNotes(){
 
-let input=document.getElementById('search')
-.value.toLowerCase();
+let input=document
+.getElementById('search')
+.value
+.toLowerCase();
 
 let cards=document.querySelectorAll('.card');
 
@@ -420,10 +409,119 @@ cards.forEach(c=>{
 
 c.style.display=
 c.innerText.toLowerCase().includes(input)
-?'block'
-:'none';
+?
+'block'
+:
+'none';
 
 });
+
+}
+
+async function uploadNote(){
+
+let title=document.getElementById("title").value;
+
+let subject=document.getElementById("subject").value;
+
+let price=document.getElementById("price").value || 0;
+
+let file=document.getElementById("imageFile").files[0];
+
+if(!title || !file){
+
+alert("Please fill all fields");
+
+return;
+
+}
+
+let formData=new FormData();
+
+formData.append("file",file);
+
+formData.append("upload_preset","idoqptnf");
+
+try{
+
+let response=await fetch(
+"https://api.cloudinary.com/v1_1/di4ty6jl4/image/upload",
+{
+method:"POST",
+body:formData
+}
+);
+
+let data=await response.json();
+
+let imageUrl=data.secure_url;
+
+let notes=document.getElementById("notes");
+
+let card=document.createElement("div");
+
+card.className="card";
+
+card.setAttribute("data-subject",subject);
+
+card.innerHTML=`
+
+<img src="${imageUrl}">
+
+<div class="card-content">
+
+<h3>${title}</h3>
+
+<div class="seller">
+by Student
+</div>
+
+<div class="rating">
+★★★★★
+</div>
+
+<p class="price">
+$${price}
+</p>
+
+<button onclick="buy(${price})">
+Buy
+</button>
+
+</div>
+
+`;
+
+notes.prepend(card);
+
+alert("Upload Success!");
+
+}
+catch(error){
+
+alert("Upload Failed");
+
+console.log(error);
+
+}
+
+}
+
+function addComment(){
+
+let input=document.getElementById("commentInput");
+
+let comments=document.getElementById("comments");
+
+if(input.value==="") return;
+
+let li=document.createElement("li");
+
+li.innerText=input.value;
+
+comments.prepend(li);
+
+input.value="";
 
 }
 
