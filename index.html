@@ -629,6 +629,10 @@ $${d.price}
 Buy
 </button>
 
+<button onclick="deleteNote('${doc.id}')">
+🗑 Delete
+</button>
+
 </div>
 
 `;
@@ -680,7 +684,17 @@ comments.appendChild(li);
 });
 
 </script>
+window.deleteNote = async function(id){
 
+if(confirm("Delete this note?")){
+
+await deleteDoc(doc(db,"notes",id));
+
+alert("Deleted!");
+
+}
+
+}
 </body>
 </html>
 ```
